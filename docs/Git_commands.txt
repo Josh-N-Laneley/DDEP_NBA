@@ -24,5 +24,8 @@ git checkout -b feature_branch_name
 # Remove old, deleted files 
 git rm --cached [folder/file]
 
-#Downloads the latest changes from the remote repository (GitHub) to your local repository
+#Downloads the latest changes from the remote repository (GitHub)
 git fetch origin 
+
+# Merge dev into main
+git merge dev
