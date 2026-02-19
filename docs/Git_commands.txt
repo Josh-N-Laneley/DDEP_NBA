@@ -1,0 +1,5 @@
+✅ Quick full workflow
+git status          # check what changed
+git add .           # stage everything
+git commit -m "your message here"  # commit changes
+git push origin main  # push to GitHub
