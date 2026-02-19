@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Git Cheatsheet for DDEP_NBA
 
 # Switch to dev branch
@@ -26,3 +27,4 @@ git rm --cached [folder/file]
 
 #Downloads the latest changes from the remote repository (GitHub) to your local repository
 git fetch origin 
+=======
