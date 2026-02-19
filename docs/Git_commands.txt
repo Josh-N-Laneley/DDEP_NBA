@@ -9,6 +9,9 @@ git add [folder/file]
 # Commit changes with a message
 git commit -m "Your commit message"
 
+# Commits changes with a message while adding new/changed files
+git commit -am "message"
+
 # Push dev branch to GitHub
 git push origin dev
 
