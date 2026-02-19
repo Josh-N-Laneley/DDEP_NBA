@@ -1,3 +1,13 @@
 So first I downloaded python on my machine as well as pandas and nba_api
 Next I use vscode to imported the leaguedashplayerstats endpoint from nba_api.stats.endpoints
 once I did that I created an object which filtered the player stats by the latest complete season (24-25) and used only the regular season
+
+
+I had some trouble with the raw data - the names with accents were appearing incorrectly
+After some research Idiscovered this was a file encoding issue
+To fix this I 
+
+
+“I encountered character encoding mismatches between UTF-8 API responses and downstream consumers and resolved it by enforcing encoding standards at export.”
+Resolved text encoding challenges (é, è, etc.) when saving NBA player stats to CSV for downstream use, ensuring clean UTF-8 output compatible with Excel and SQL ingestion.
+
