@@ -1,2 +1,35 @@
 # DDEP_NBA
 My personal data engineering project using NBA data
+
+How to Run
+# Git Cheatsheet for DDEP_NBA
+
+# Switch to dev branch
+git checkout dev
+
+# Add all new or changed files
+git add [folder/file]
+
+# Commit changes with a message
+git commit -m "Your commit message"
+
+# Commits changes with a message while adding new/changed files
+git commit -am "message"
+
+# Push dev branch to GitHub
+git push origin dev
+
+# Pull latest changes from GitHub
+git pull origin dev
+
+# Create a new branch
+git checkout -b feature_branch_name
+
+# Remove old, deleted files 
+git rm --cached [folder/file]
+
+#Downloads the latest changes from the remote repository (GitHub)
+git fetch origin 
+
+# Merge dev into main
+git merge dev
