@@ -1,0 +1,2 @@
+#Pipe schema file into postgres container and run it
+Get-Content sql/schema.sql | docker exec -i nba-postgres psql -U postgres -d nba
