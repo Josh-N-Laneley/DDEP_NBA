@@ -52,3 +52,6 @@ CREATE TABLE fact_player_stats (
     td3 INTEGER,
     nba_fantasy_pts FLOAT
 );
+
+CREATE INDEX idx_fact_player_id ON fact_player_stats(player_id);
+CREATE INDEX idx_fact_team_id ON fact_player_stats(team_id);
