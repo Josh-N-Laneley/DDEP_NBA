@@ -1,6 +1,6 @@
 # NBA ETL Pipeline — 2024/25 Season
 
-A data engineering project that extracts NBA player statistics from the NBA API, transforms and cleans the data, and loads it into a PostgreSQL database running in Docker. Built as a demonstration of core data engineering skills including ETL pipeline development, dimensional modelling, and data validation.
+This is a data engineering project that extracts NBA player statistics from the NBA API, transforms and cleans the data, and loads it into a PostgreSQL database running in Docker. It was built as a demonstration of core data engineering skills including ETL pipeline development, dimensional modelling, and data validation. 
 
 ---
 
@@ -8,23 +8,23 @@ A data engineering project that extracts NBA player statistics from the NBA API,
 ```
 DDEP_NBA/
 ├── data/
-│   ├── raw/                  # Original CSV extracted from NBA API
-│   └── processed/            # Cleaned CSVs ready for loading
+│   ├── processed/            # Cleaned CSVs ready for loading
+│   └── raw/                  # Original CSV extracted from NBA API
 ├── docs/                     # Supporting documentation
+├── sql/
+│   ├── sample_queries.sql    # Example analytics queries
+│   └── schema.sql            # Table definitions, indexes
 ├── src/
 │   ├── extract.py            # Pulls data from NBA API
-│   ├── transform.py          # Cleans and reshapes data to match schema
 │   ├── load.py               # Loads data into PostgreSQL
-│   ├── validate.py           # Validates data loaded correctly
-│   └── pipeline.py           # Orchestrates full ETL process
-├── sql/
-│   ├── schema.sql            # Table definitions, indexes
-│   └── sample_queries.sql    # Example analytics queries
+│   ├── pipeline.py           # Orchestrates full ETL process
+│   ├── transform.py          # Cleans and reshapes data to match schema
+│   └── validate.py           # Validates data loaded correctly
 ├── .env                      # Local credentials (not committed)
-├── .gitignore
-├── docker-compose.yml
-├── requirements.txt
-└── README.md
+├── .gitignore                # Excludes sensitive files from version control
+├── docker-compose.yml        # Defines and runs the PostgreSQL container
+├── requirements.txt          # Python dependencies — install with pip install -r requirements.txt
+└── README.md                 # Project documentation
 ```
 
 ---
@@ -64,7 +64,7 @@ DB_USER=postgres
 DB_PASSWORD=yourpassword
 ```
 
-Credentials are stored in a `.env` file excluded from version control via `.gitignore`. In a production environment these would be managed through a secrets manager such as AWS Secrets Manager or Azure Key Vault.
+Credentials are stored in a `.env` file excluded from version control via `.gitignore`. 
 
 ### 5. Start the PostgreSQL container
 ```bash
@@ -127,7 +127,7 @@ Stores player performance statistics for the 2024-25 season. Uses a surrogate ke
 ### Design Decisions
 - Dropped all `_RANK` columns as these can be derived from the data using SQL, avoiding redundant storage
 - Dropped `WNBA_FANTASY_PTS` as irrelevant to this dataset
-- Kept `NBA_FANTASY_PTS` as a useful composite performance metric
+- Kept `NBA_FANTASY_PTS` as a useful performance metric
 - Added indexes on `player_id` and `team_id` foreign keys in the fact table to optimise JOIN performance
 - Stats normalised per game in queries rather than using totals, to fairly compare players with different games played
 
@@ -149,8 +149,9 @@ Sample queries are available in `sql/sample_queries.sql` covering:
 - Win percentage vs fantasy points correlation
 
 ### Known Limitations
-- Win percentage queries (4 and 5) derive team standings from player-level data. For production accuracy a dedicated NBA team stats endpoint would be used instead
-- The dataset is a point-in-time snapshot from when the pipeline was last run. In production the pipeline would be scheduled to run automatically on a regular cadence using an orchestration tool such as Apache Airflow or a cron job
+- Win percentage queries (4 and 5) derive team standings from player-level data.
+    - Currently workign on bringing in more data for better analysis
+- The dataset is a point in time snapshot from when the pipeline was last run. In time I will look to scheduling runs through apache airflows
 
 ---
 

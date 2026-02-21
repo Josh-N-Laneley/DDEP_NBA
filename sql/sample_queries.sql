@@ -44,23 +44,7 @@ JOIN dim_player p ON f.player_id = p.player_id
 ORDER BY (f.stl + f.blk) DESC
 LIMIT 10;
 
--- 4. Team Average Stats
--- Calculates average player stats per team
--- SCRAPPED - dataset means average stats can only be calculated at the player level, not team level
-SELECT 
-    t.team_abbreviation,
-    ROUND(AVG(f.pts / NULLIF(f.gp, 0))::numeric, 2) AS avg_pts_per_game,
-    ROUND(AVG(f.ast / NULLIF(f.gp, 0))::numeric, 2) AS avg_ast_per_game,
-    ROUND(AVG(f.reb / NULLIF(f.gp, 0))::numeric, 2) AS avg_reb_per_game,
-    ROUND(AVG(f.stl / NULLIF(f.gp, 0))::numeric, 2) AS avg_stl_per_game,
-    ROUND(AVG(f.blk / NULLIF(f.gp, 0))::numeric, 2) AS avg_blk_per_game
-FROM fact_player_stats f
-JOIN dim_team t ON f.team_id = t.team_id
-GROUP BY t.team_abbreviation
-ORDER BY avg_pts_per_game DESC;
-
-
--- 5. Win Percentage Leaders
+-- 4. Win Percentage Leaders
 -- Shows teams ranked by win percentage
 SELECT 
     t.team_abbreviation,
@@ -70,7 +54,7 @@ JOIN dim_team t ON f.team_id = t.team_id
 GROUP BY t.team_abbreviation
 ORDER BY win_pct DESC;
 
--- 6. Win Percentage vs Fantasy Points
+-- 5. Win Percentage vs Fantasy Points
 -- Explores whether teams with higher win % have higher fantasy point players
 SELECT 
     t.team_abbreviation,
