@@ -18,7 +18,7 @@ def extract_player_stats():
     player_stats_df = player_stats.get_data_frames()[0]
 
     # Save raw data to CSV
-    player_stats_df.to_csv('data/raw/nba_player_stats_2024_25.csv', index=False)
+    player_stats_df.to_csv('data/raw/nba_player_stats_2024_25.csv', index=False, encoding='utf-8-sig')
     
     print(f"Extraction complete. {len(player_stats_df)} rows saved to data/raw/nba_player_stats_2024_25.csv")
     
