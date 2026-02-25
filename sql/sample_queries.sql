@@ -28,7 +28,7 @@ SELECT
     f.ft_pct
 FROM fact_player_stats f
 JOIN dim_player p ON f.player_id = p.player_id
-ORDER BY pts_per_game DESC
+ORDER BY (f.pts / NULLIF(f.gp, 0)) DESC
 LIMIT 10;
 
 -- 3. Best Defensive Players
@@ -64,3 +64,18 @@ FROM fact_player_stats f
 JOIN dim_team t ON f.team_id = t.team_id
 GROUP BY t.team_abbreviation
 ORDER BY win_pct DESC;
+
+-- 6. Team scoring leaders
+-- Ranks every player within their team by points per game
+SELECT
+p.first_name,
+p.last_name,
+t.team_abbreviation,
+(f.pts / NULLIF(f.gp, 0)) AS ppg,
+RANK() OVER (
+    PARTITION BY t.team_abbreviation
+    ORDER BY (f.pts / NULLIF(f.gp, 0)) DESC
+) AS team_ppg_rank
+FROM fact_player_stats f
+LEFT JOIN dim_player p ON p.player_id = f.player_id
+LEFT JOIN dim_team t ON t.team_id = f.team_id
