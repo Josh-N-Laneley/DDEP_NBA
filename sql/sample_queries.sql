@@ -78,4 +78,4 @@ RANK() OVER (
 FROM fact_player_stats f
 LEFT JOIN dim_player p ON p.player_id = f.player_id
 LEFT JOIN dim_team t ON t.team_id = f.team_id
-ORDER BY t.team_abbreviation, team_ppg_rank
+ORDER BY t.team_abbreviation, team_ppg_rank;
