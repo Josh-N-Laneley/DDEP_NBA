@@ -68,10 +68,9 @@ ORDER BY win_pct DESC;
 -- 6. Team scoring leaders
 -- Ranks every player within their team by points per game
 SELECT
-p.first_name,
-p.last_name,
+p.player_name,
 t.team_abbreviation,
-(f.pts / NULLIF(f.gp, 0)) AS ppg,
+ROUND((f.pts / NULLIF(f.gp, 0))::numeric, 2) AS ppg,
 RANK() OVER (
     PARTITION BY t.team_abbreviation
     ORDER BY (f.pts / NULLIF(f.gp, 0)) DESC
@@ -79,3 +78,4 @@ RANK() OVER (
 FROM fact_player_stats f
 LEFT JOIN dim_player p ON p.player_id = f.player_id
 LEFT JOIN dim_team t ON t.team_id = f.team_id
+ORDER BY t.team_abbreviation, team_ppg_rank
