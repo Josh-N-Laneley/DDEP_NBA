@@ -176,6 +176,7 @@ Sample queries are available in `sql/sample_queries.sql` covering:
 - Best defensive players by steals and blocks
 - Win percentage by team
 - Win percentage vs fantasy points correlation
+- Player points per game ranked by team
 
 ### Known Limitations
 - Win percentage queries (4 and 5) derive team standings from player-level data.
@@ -201,3 +202,4 @@ If this pipeline were to be productionised:
 - Credentials would be managed through a secrets manager
 - The PostgreSQL instance would be hosted on a cloud provider such as AWS RDS or Azure Database
 - Additional logging and alerting would be added for pipeline failures
+- The print staements used throughout the pipeline would be replaced by python's logging module to provide persistent records, timestamps and severity levels - essential for audit trails and monitoring
