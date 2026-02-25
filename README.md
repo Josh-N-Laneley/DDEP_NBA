@@ -153,6 +153,7 @@ Stores team information. Deduplicated on `team_id`. 30 rows — one per NBA team
 Stores player performance statistics for the 2024-25 season. Uses a surrogate key `stat_id` because players who were traded mid-season appear multiple times — once per team.
 
 ### Design Decisions
+-Specified `utf-8-sig` encoding when saving the raw CSV to correctly handle player names which conatin accents, preventing data corruption flowing through the rest of the pipeline
 - Dropped all `_RANK` columns as these can be derived from the data using SQL, avoiding redundant storage
 - Dropped `WNBA_FANTASY_PTS` as irrelevant to this dataset
 - Kept `NBA_FANTASY_PTS` as a useful performance metric
