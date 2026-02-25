@@ -4,6 +4,34 @@ This is a data engineering project that extracts NBA player statistics from the 
 
 ---
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    PL[pipeline.py<br>Orchestrator]
+    subgraph Extract
+        A[extract.py] --> B[NBA API]
+        B --> C[data/raw/]
+    end
+    subgraph Transform
+        D[transform.py] --> E[data/processed/]
+    end
+    subgraph Load
+        F[load.py] --> G[(PostgresSQL<br>Docker)]
+    end
+    subgraph Validate
+        H[validate.py] --> I[validation,<br>Report]
+        end
+    
+    PL --> Extract
+    C --> Transform
+    E --> Load
+    G --> Validate
+```
+
+
+---
+
 ## Folder Structure
 ```
 DDEP_NBA/
