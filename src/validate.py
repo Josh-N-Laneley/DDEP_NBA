@@ -136,7 +136,7 @@ def validate_foreign_keys(engine):
             WHERE t.team_id IS NULL
         """)).scalar()
         
-        status = "✅ PASS" if result == 0 else "❌ FAIL"
+        status = "PASS" if result == 0 else "❌ FAIL"
         if result != 0:
             all_passed = False
         print(f"{status} | fact_player_stats.team_id: {result} orphaned records")
