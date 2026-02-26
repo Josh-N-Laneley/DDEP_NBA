@@ -80,7 +80,7 @@ venv\Scripts\activate
 
 ### 3. Install dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r docs/requirements.txt
 ```
 
 ### 4. Create a `.env` file in the project root
