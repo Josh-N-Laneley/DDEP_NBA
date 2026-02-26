@@ -38,7 +38,7 @@ def validate_row_counts(engine):
         with engine.connect() as conn:
             db_count = conn.execute(text(f"SELECT COUNT(*) FROM {table}")).scalar()
         
-        status = "✅ PASS" if csv_count == db_count else "❌ FAIL"
+        status = "PASS" if csv_count == db_count else "FAIL"
         if csv_count != db_count:
             all_passed = False
             
@@ -71,7 +71,7 @@ def validate_no_duplicates(engine):
                 ) duplicates
             """)).scalar()
         
-        status = "✅ PASS" if result == 0 else "❌ FAIL"
+        status = "PASS" if result == 0 else "FAIL"
         if result != 0:
             all_passed = False
             
@@ -99,7 +99,7 @@ def validate_no_nulls(engine):
                 SELECT COUNT(*) FROM {table} WHERE {column} IS NULL
             """)).scalar()
         
-        status = "✅ PASS" if result == 0 else "❌ FAIL"
+        status = "PASS" if result == 0 else "❌ FAIL"
         if result != 0:
             all_passed = False
             
@@ -124,7 +124,7 @@ def validate_foreign_keys(engine):
             WHERE p.player_id IS NULL
         """)).scalar()
         
-        status = "✅ PASS" if result == 0 else "❌ FAIL"
+        status = "PASS" if result == 0 else "❌ FAIL"
         if result != 0:
             all_passed = False
         print(f"{status} | fact_player_stats.player_id: {result} orphaned records")
@@ -162,9 +162,9 @@ def run_validation():
     
     print("\n" + "=" * 40)
     if all(results):
-        print("✅ All validation checks passed!")
+        print("All validation checks passed!")
     else:
-        print("❌ Some validation checks failed — review above")
+        print("Some validation checks failed — review above")
     print("=" * 40)
 
 # Only runs if this file is executed directly
